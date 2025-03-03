@@ -14,10 +14,10 @@
     <style>
         
         .custom-background {
-            background: linear-gradient(to right, rgb(42, 88, 141), rgb(168, 179, 189)); 
+            background: linear-gradient(to right, rgb(124, 31, 121), rgb(207, 56, 164)); 
             color: white;
             padding: 15px 0;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2); 
         }
 
         .banner-title {
