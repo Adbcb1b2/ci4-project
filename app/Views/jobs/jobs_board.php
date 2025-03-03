@@ -17,12 +17,33 @@
 
   <!-- Main Content -->
   <div class="container mt-3">
-    <div class="row">
-      <div class="col-12">
-        <p class="text-justify">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo impedit minima, sunt repellendus cumque repudiandae excepturi quidem ex quaerat enim dolorum in error tempora eaque est harum, exercitationem voluptas expedita aut maiores iste, tempore illum ea molestias. Consectetur aliquid illum neque a sequi ipsum impedit rerum fugiat, soluta reiciendis magnam obcaecati cum incidunt culpa nemo alias optio iure aperiam facilis.
-        </p>
-      </div>
+    
+        <!-- Filter Section -->
+    <div class="row mt-4 mb-4">
+        <div class="col-md-4">
+            <label for="locationFilter" class="form-label">Location</label>
+            <select id="locationFilter" class="form-select">
+                <!-- Options will be added dynamically -->
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="jobDescriptionFilter" class="form-label">Job Title</label>
+            <select id="jobDescriptionFilter" class="form-select">
+                <!-- Options will be added dynamically -->
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="salaryFilter" class="form-label">Minimum Salary</label>
+            <select id="salaryFilter" class="form-select">
+                <option value="30000">£30,000+</option>
+                <option value="40000">£40,000+</option>
+                <option value="50000">£50,000+</option>
+                <option value="50000">£60,000+</option>
+                <option value="50000">£70,000+</option>
+                
+            </select>
+        </div>
     </div>
-  </div>
-</div>
+  </div> 
+
+</div> 
