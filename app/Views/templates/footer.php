@@ -3,7 +3,7 @@
 </body>
 <footer>
     <div class="container-fluid">
-        <div class="row align-center px-5 py-3 custom-background">
+        <div class="row px-5 py-3 custom-background">
             <div class="col-md-12 text-center">
                 <p class="mb-0">&copy; Kim Richards 2025. All rights reserved.</p>
             </div>

@@ -21,9 +21,9 @@
         }
 
         .banner-title {
-            font-size: 3rem;
-            font-weight: bold;
+            font-size: 2rem;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); 
+            color: white;
         }
 
         .align-center {
