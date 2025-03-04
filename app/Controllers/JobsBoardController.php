@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class JobsBoard extends BaseController
+class JobsBoardController extends BaseController
 {
     public function index(): string
     {
