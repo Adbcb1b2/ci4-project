@@ -46,6 +46,26 @@
             border: none;
             border-radius: 50px 0 0 50px; 
         }
+
+        .card-body {
+            position: relative;
+        }
+
+        .view-job-btn {
+            position: absolute; /* Position the button at the bottom right of the card */
+            bottom: 10px;
+            right: 10px;
+            background: rgb(124, 31, 121);
+            color: white;
+            border: none;
+
+        }
+
+        .view-job-btn:hover {
+            background: rgb(207, 56, 164);
+            color: white;
+            border: none;
+        }
     </style>
 </head>
 <body>
