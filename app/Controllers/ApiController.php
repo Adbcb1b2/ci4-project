@@ -18,7 +18,7 @@
         // Set connection details
         $login = '2ee0efe8-5279-42de-80f8-6e7af96a0830';
         $password = '';
-        $url = 'https://www.reed.co.uk/api/1.0/search?keywords=graduate-software-engineer';
+        $url = 'https://www.reed.co.uk/api/1.0/search?keywords=graduate-software-';
     
         // Create CURL object with options
         $ch = curl_init();
@@ -39,6 +39,8 @@
 
         // Loop through the result
         foreach ($jobs->results as $job) {
+
+
             // Create variable to hold data for each record
             $jobData = [
                 'reed_job_id' => $job->jobId,
