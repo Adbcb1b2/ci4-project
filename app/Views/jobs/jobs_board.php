@@ -47,7 +47,33 @@
     <!-- Job Listings Container -->
     <div class="row d-flex align-items-stretch" id="jobResultsContainer">
       <!-- Job Listings will be added dynamically -->
+      <?php foreach ($jobs as $job): ?>
+        <div class="col-md-4 mb-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title"><?= esc($job['job_title']); ?></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><?= esc($job['employer_name']); ?></h6>
+              <p class="card-text"><strong>Location:</strong> <?= esc($job['location']); ?></p>
+              <p class="card-text"><strong>Salary:</strong> 
+                <?php
+                  if ($job['minimum_salary']) {
+                      echo '£' . number_format($job['minimum_salary']);
+                      if ($job['maximum_salary']) {
+                          echo ' - £' . number_format($job['maximum_salary']);
+                      }
+                  }
+                ?>
+              </p>
+              <p class="card-text"><strong>Applications:</strong> <?= esc($job['applications_count']); ?></p>
+              <p class="card-text"><strong>Deadline:</strong> <?= esc($job['expiration_date']); ?></p>
+              <p class="card-text"><?= esc(word_limiter($job['job_description'], 50)); ?>...</p>
+              <a href="<?= esc($job['job_url']); ?>" class="btn view-job-btn" target="_blank">View Job</a>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
     </div>
+    
 
   </div>
 </div>

@@ -14,7 +14,24 @@ class JobsBoardController extends BaseController
      */
     public function index(): string
     {
-        return view('templates/header') . view('jobs/jobs_board') . view('templates/footer');
+        // Create an instance of the JobsModel
+        $jobsModel = new JobsModel();
+        
+        // Fetch jobs from the database 
+        $jobs = $jobsModel->findAll();
+
+        // Check if jobs data is outdated (older than 1 hour)
+        if($this->isDataOutdated($jobs)) {
+            // Fetch new jobs from Reed API, update the DB
+            $apiController = new APIController();
+            $apiController->fetchJobsFromReed();
+
+            // Get updated jobs from the database after inserting new ones
+            $jobs = $jobsModel->getJobs();
+        }
+        
+        // Return the view with the jobs data
+        return view('templates/header') . view('jobs/jobs_board', ['jobs' => $jobs]) . view('templates/footer');
     }
 
     /**
@@ -38,7 +55,7 @@ class JobsBoardController extends BaseController
         return $timeDifference-> h >= 1;
     }
 
-    
+
 
 
 
