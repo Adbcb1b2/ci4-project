@@ -66,7 +66,7 @@
               </p>
               <p class="card-text"><strong>Applications:</strong> <?= esc($job['applications_count']); ?></p>
               <p class="card-text"><strong>Deadline:</strong> <?= esc($job['expiration_date']); ?></p>
-              <p class="card-text"><?= esc(word_limiter($job['job_description'], 50)); ?>...</p>
+              <p class="card-text"><?= esc(word_limiter($job['job_description'], 50, '.')); ?>...</p>
               <a href="#" class="btn view-job-btn">View Job</a>
             </div>
           </div>
