@@ -26,6 +26,11 @@
             color: white;
         }
 
+        .banner-title:hover{
+            font-weight: bold;
+            color: white;
+        }
+
         .align-center {
             display: flex;
             align-items: center;
@@ -66,6 +71,8 @@
             color: white;
             border: none;
         }
+
+
     </style>
 </head>
 <body>
