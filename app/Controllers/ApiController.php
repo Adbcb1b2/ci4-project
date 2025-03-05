@@ -7,7 +7,7 @@
  class ApiController extends BaseController
  {
     /**
-     * Fetch jobs from the reed API, filter by keywords: graduate-software-engineer, location: warwick, distance from location: 30 miles
+     * Fetch jobs from the reed API, filter by keywords: graduate-software
      * @return void
      */
     public function fetchJobsFromReed()
@@ -18,7 +18,7 @@
         // Set connection details
         $login = '2ee0efe8-5279-42de-80f8-6e7af96a0830';
         $password = '';
-        $url = 'https://www.reed.co.uk/api/1.0/search?keywords=graduate-software-engineer&location=warwick&distancefromlocation=30';
+        $url = 'https://www.reed.co.uk/api/1.0/search?keywords=graduate-software-engineer';
     
         // Create CURL object with options
         $ch = curl_init();
@@ -35,14 +35,14 @@
         curl_close($ch);
 
         // Delete all existing jobs in the database and re-set autoincrement - do not want to store expired jobs
-        $jobsModel->trunacate();
+        $jobsModel->truncate();
 
         // Loop through the result
         foreach ($jobs->results as $job) {
             // Create variable to hold data for each record
             $jobData = [
-                'reed_job_id' => $job->id,
-                'reed_creation_date' => date('Y-m-d', strtotime($job->dateAdded)),
+                'reed_job_id' => $job->jobId,
+                'reed_creation_date' => date('Y-m-d', strtotime($job->date)),
                 'job_title' => $job->jobTitle,
                 'employer_name' => $job->employerName,
                 'location' => $job->locationName,
@@ -51,7 +51,7 @@
                 'job_description' => $job->jobDescription ?? null,
                 'job_url' => $job->jobUrl,
                 'expiration_date' => isset($job->expirationDate) ? date('Y-m-d', strtotime($job->expirationDate)) : null,
-                'applications_count' => $job->applicationsCount ?? null,
+                'applications_count' => $job->applications ?? null,
             ];
 
             // Insert the the job into the database

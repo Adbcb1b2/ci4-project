@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class JobsModel extends Model
 {
     // Set table name
-    protected $table = 'news';
+    protected $table = 'jobs';
 
     // Set the primary key
     protected $primaryKey = 'id';
