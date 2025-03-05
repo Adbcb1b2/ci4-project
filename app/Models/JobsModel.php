@@ -14,7 +14,17 @@ class JobsModel extends Model
 
     // Define the fields that can be inserted/updated.
     // id and created_at needn't be included as they are auto values
-    protected $allowedFields = ['reed_job_id', 'reed_creation_date', 'job_title', 'employer_name', 'location', 'minimum_salary', 'maximum_salary', 'job_description', 'job_url', 'expiration_date', 'applications'];
+    protected $allowedFields = ['reed_job_id', 
+        'reed_creation_date', 
+        'job_title', 
+        'employer_name', 
+        'location', 
+        'minimum_salary', 
+        'maximum_salary', 
+        'job_description', 
+        'job_url', 
+        'expiration_date', 
+        'applications_count'];
 
     /**
      * Retrieves all jobs from the database
