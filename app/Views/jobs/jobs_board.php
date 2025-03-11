@@ -4,17 +4,17 @@
     <div class="container-fluid">
       <a class="navbar-brand banner-title px-3">Jobs Board for Graduate Developers</a>
 
-      <!-- Search Bar Form -->
-      <form class="d-flex" role="search">
-        <div class="input-group">
-          <!-- Icon -->
-          <span class="input-group-text">
-            <i class="bi bi-search text-dark"></i>
-          </span>
-          <!-- Search Bar -->
-          <input type="text" class="form-control search-bar" placeholder="Search jobs...">
-        </div>
-      </form>
+  <!-- Search Bar Form -->
+  <form class="d-flex flex-grow-1" role="search" style="max-width: 500px; margin-left: auto;">
+    <div class="input-group w-100">
+      <!-- Icon -->
+      <span class="input-group-text">
+        <i class="bi bi-search text-dark"></i>
+      </span>
+      <!-- Search Bar -->
+      <input type="text" class="form-control search-bar" placeholder="Search keywords in description or title...">
+    </div>
+  </form>
     </div>
   </nav>
 
