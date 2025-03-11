@@ -35,6 +35,8 @@
       <div class="col-md-4">
         <label for="salaryFilter" class="form-label">Minimum Salary</label>
         <select id="salaryFilter" class="form-select">
+          <option value="0">Any</option>
+          <option value="20000">£20,000+</option>
           <option value="30000">£30,000+</option>
           <option value="40000">£40,000+</option>
           <option value="50000">£50,000+</option>
