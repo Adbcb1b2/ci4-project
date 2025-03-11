@@ -45,4 +45,51 @@ class JobsModel extends Model
         return $this->insert($jobData); // Need to build a 
     }
 
+    /**
+     * Returns the unique values of a column in the database, column name given by parameter 
+     * @param mixed $column
+     * @return mixed
+     */
+    public function getUniqueValues($column)
+    {
+        
+        return $this->select($column)
+                    ->distinct()
+                    ->where($column. ' IS NOT NULL')
+                    ->orderBy($column, 'ASC') // Order by ascending
+                    ->findAll();
+
+    }
+
+    /**
+     * Gets jobs from the database based on the filters applied
+     * @param mixed $location
+     * @param mixed $title
+     * @param mixed $minSalary
+     * @return array
+     */
+    public function getFilteredJobs($location = '', $title = '', $minSalary = 0)
+    {
+        // To build complex query, step by step, as includes conditional logic
+        $builder = $this->builder();
+
+        // If the location isn't empty (i.e. has a filter selected), add it to the query
+        if(!empty($location)){
+            $builder->where('location', $location);
+        }
+
+        // If the job title isn't empty (i.e. has a filter selected), add it to the query
+        if(!empty($title)){
+            $builder->where('job_title', $title);
+        }
+
+        // If the minimum salary is greater than 0 (i.e. has a filter selected), add it to the query
+        if($minSalary > 0){
+            $builder->where('minimum_salary >=', $minSalary);
+        }
+
+        return $builder->get()->getResultArray();
+
+    }
+
 }

@@ -23,13 +23,15 @@
       <div class="col-md-4">
         <label for="locationFilter" class="form-label">Location</label>
         <select id="locationFilter" class="form-select">
-          <!-- Options will be added dynamically -->
+          <option value="">Any</option>
+          <!-- Other options will be added dynamically -->
         </select>
       </div>
       <div class="col-md-4">
         <label for="jobDescriptionFilter" class="form-label">Job Title</label>
         <select id="jobDescriptionFilter" class="form-select">
-          <!-- Options will be added dynamically -->
+          <option value="">Any</option>
+          <!-- Other options will be added dynamically -->
         </select>
       </div>
       <div class="col-md-4">
