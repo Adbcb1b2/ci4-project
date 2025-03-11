@@ -56,6 +56,48 @@ class JobsBoardController extends BaseController
         return $timeDifference-> h >= 1;
     }
 
+    /**
+     * Gets data for the dropdown menus on the job board page
+     * @return mixed
+     */
+    public function getDropdownData()
+    {   
+        // Instance of the JobsModel
+        $jobsModel = new JobsModel();
+
+        // List of locations using the getUniqueValues method in the jobs model to get unique values from location column
+        $locations = $jobsModel->getUniqueValues('location');
+        // List of job titles using the getUniqueValues method in the jobs model to get unique values from job-title column
+        $titles = $jobsModel->getUniqueValues('job-title');
+
+        // Returns the result as a JSON object to be used in the AJAX call
+        return $this->response->setJSON(['locations' => $locations, 'titles' => $titles]);
+
+    }
+
+    /**
+     * Filters jobs based on the dropdown criteria
+     * @return mixed
+     */
+    public function filter()
+    {
+        // Receive incoming data from the dropdowns
+        $location = $this->request->getPost('location');
+        $title = $this->request->getPost('title');
+        $minSalary = $this->request->getPost('minSalary');
+
+        // Instance of the JobsModel
+        $jobsModel = new JobsModel();
+
+        // Call method from the model with the data recieve from the dropdowns
+        $jobs = $jobsModel->getFilteredJobs($location, $title, $minSalary);
+
+        // Return the response in JSON format, to be used in the AJAX call
+        return $this->response->setJSON($jobs);
+
+
+    }
+
 
 
 
