@@ -68,7 +68,7 @@ class JobsBoardController extends BaseController
         // List of locations using the getUniqueValues method in the jobs model to get unique values from location column
         $locations = $jobsModel->getUniqueValues('location');
         // List of job titles using the getUniqueValues method in the jobs model to get unique values from job-title column
-        $titles = $jobsModel->getUniqueValues('job-title');
+        $titles = $jobsModel->getUniqueValues('job_title');
 
         // Returns the result as a JSON object to be used in the AJAX call
         return $this->response->setJSON(['locations' => $locations, 'titles' => $titles]);

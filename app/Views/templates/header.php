@@ -14,7 +14,7 @@
     <style>
         
         .custom-background {
-            background: linear-gradient(to right, rgb(124, 31, 121), rgb(207, 56, 164)); 
+            background: linear-gradient(to right, rgb(1, 10, 147), rgb(41, 169, 233)); 
             color: white;
             padding: 15px 0;
             box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2); 
@@ -59,17 +59,36 @@
             position: absolute; /* Position the button at the bottom right of the card */
             bottom: 10px;
             right: 10px;
-            background: rgb(124, 31, 121);
+            background: rgb(1, 10, 147);
             color: white;
             border: none;
 
         }
 
         .view-job-btn:hover {
-            background: rgb(207, 56, 164);
+            
+            background: rgb(41, 169, 233);
             color: white;
             border: none;
         }
+
+        .filter-btn{
+            background: rgb(1, 10, 147);
+            color: white;
+        }
+
+        .filter-btn:hover{
+            background: rgb(41, 169, 233);
+            color: white;
+        }
+
+        .filter-bar {
+            background: linear-gradient(to right, rgb(41, 169, 233), rgb(1, 10, 147) ); 
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
 
 
     </style>
