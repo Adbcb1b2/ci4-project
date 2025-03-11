@@ -74,16 +74,18 @@
               <!-- Salary -->
               <p class="card-text"><strong>Salary:</strong>
                 <?php
-                  // If job has a minimum salary, show it
-                  if ($job['minimum_salary']) {
-                    echo '£' . number_format($job['minimum_salary']);
-                    // If job has a maximum salary, show it
-                  }
-                  // If job has a maximum salary, show it
-                  if ($job['maximum_salary']) {
+                  // If there's salary info, format and display it
+                  if ($job['minimum_salary'] || $job['maximum_salary']) {
+                    if ($job['minimum_salary']) {
+                      echo '£' . number_format($job['minimum_salary']);
+                    }
+                    if ($job['maximum_salary']) {
                       echo ' - £' . number_format($job['maximum_salary']);
                     }
-                  
+                  } else {
+                    // If neither is present, show 'Not specified'
+                    echo 'Not specified';
+                  }
                 ?>
               </p>
               <!-- Number of Applications -->
@@ -178,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // If jobs are returned, dynamically create a card for each job
+        // If salary given, format and display, otherwise show 'Not specified'
         jobs.forEach(job => {
           const div = document.createElement('div');
           div.className = 'col-md-4 col-sm-6 col-xsm-1 mb-3';
@@ -187,8 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h5 class="card-title">${job.job_title}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">${job.employer_name}</h6>
                 <p class="card-text"><strong>Location:</strong> ${job.location}</p>
-                <p class="card-text"><strong>Salary:</strong> £${Number(job.minimum_salary).toLocaleString()} - £${Number(job.maximum_salary).toLocaleString()}</p>
-                <p class="card-text"><strong>Applications:</strong> ${job.applications_count ?? 0}</p>
+                <p class="card-text"><strong>Salary:</strong> ${
+                  (job.minimum_salary || job.maximum_salary)
+                    ? `${job.minimum_salary ? '£' + Number(job.minimum_salary).toLocaleString() : ''}${job.maximum_salary ? ' - £' + Number(job.maximum_salary).toLocaleString() : ''}`
+                    : 'Not specified'
+                }</p>                <p class="card-text"><strong>Applications:</strong> ${job.applications_count ?? 0}</p>
                 <p class="card-text"><strong>Deadline:</strong> ${job.expiration_date}</p>
                 <p class="card-text mb-5">${job.job_description.split(' ').slice(0, 50).join(' ')}...</p>
                 <a href="#" class="btn view-job-btn">View Job</a>
