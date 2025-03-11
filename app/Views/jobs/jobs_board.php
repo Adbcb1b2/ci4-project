@@ -114,6 +114,18 @@
 // Listener for pafe to fully load
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM fully loaded, fetching dropdown criteria');
+
+    // Always add vibration listener to View Job buttons present on page load
+    document.querySelectorAll('.view-job-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      console.log('View job clicked!');
+      if (navigator.vibrate) {
+        console.log('Vibrating...');
+        navigator.vibrate(100);
+      }
+    });
+  });
+  
   // Get references to DOM elements
   const locationFilter = document.getElementById('locationFilter');
   const jobTitleFilter = document.getElementById('jobTitleFilter');
@@ -155,7 +167,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Event listener for filter button
   filterBtn.addEventListener('click', () => {
-    console.log('Filtering...');
+    console.log('Filter button clicked');
+
+    // Vibrate when filter button is clicked
+    if (navigator.vibrate) {
+      console.log('Vibrating...');
+      navigator.vibrate(100); // vibrate for 100ms on filter click
+    }
 
     // Create a form object
     const formData = new FormData();
@@ -202,9 +220,25 @@ document.addEventListener('DOMContentLoaded', () => {
         // Insert cards to resultsContainer
         resultsContainer.appendChild(div);
       });
+
+        // Add listener to all view job buttons
+      document.querySelectorAll('.view-job-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        console.log('View job clicked!');
+        // If the browser supports vibration
+        if (navigator.vibrate) {
+          // Vibrate for 100ms
+          console.log('Vibrating...');
+          navigator.vibrate(100); 
+        }
+        });
+      });
     })
     // Catch errors
     .catch(error => console.error('Filtered Fetch error:', error));
   });
+
+
+
 });
 </script>
