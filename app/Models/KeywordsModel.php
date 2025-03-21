@@ -18,6 +18,7 @@ class KeywordsModel extends Model
     public function getSuggestions($term)
     {
         return $this->like('keyword', $term)
-                    ->findAll(); 
+        ->limit(5)
+        ->findAll();
     }
 }
