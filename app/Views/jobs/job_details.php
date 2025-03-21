@@ -1,6 +1,6 @@
 <nav class="navbar bg-body-tertiary custom-background">
     <div class="container-fluid">
-      <a href="<?= base_url('jobs-board') ?>" class="navbar-brand banner-title px-3">Jobs Board for Graduate Developers</a>
+      <a href="<?= base_url('jobs-board') ?>" class="navbar-brand banner-title px-3">Grad Dev Jobs</a>
 
     </div>
   </nav>
@@ -28,7 +28,7 @@
         }
         ?>
     </p>
-
+cc
     <p><strong>Applications:</strong> <?= esc($job['applications_count']) ?? '0' ?></p>
     <p><strong>Application Deadline:</strong> <?= esc($job['expiration_date']) ?></p>
     <p><strong>Job Posted:</strong> <?= esc($job['reed_creation_date']) ?></p>
