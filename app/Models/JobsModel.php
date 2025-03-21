@@ -24,7 +24,8 @@ class JobsModel extends Model
         'job_description', 
         'job_url', 
         'expiration_date', 
-        'applications_count'];
+        'applications_count',
+        'short_description'];
 
     /**
      * Retrieves all jobs from the database

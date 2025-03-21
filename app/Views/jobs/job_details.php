@@ -34,7 +34,8 @@
     <p><strong>Job Posted:</strong> <?= esc($job['reed_creation_date']) ?></p>
 
     <hr>
-    <p><?= esc($job['job_description']) ?></p>
+    <!-- Full job description, keep actual formatting returned from reed-->
+    <?= htmlspecialchars_decode($job['job_description']) ?>
     <hr>
     <!-- Link to job application on Reed -->
 

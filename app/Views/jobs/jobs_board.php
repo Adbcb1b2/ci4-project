@@ -93,9 +93,9 @@
               <!-- Deadline to apply -->
               <p class="card-text"><strong>Deadline:</strong> <?= esc($job['expiration_date']); ?></p>
               <!-- First 50 words of job description -->
-              <p class="card-text mb-5"><?= esc(word_limiter($job['job_description'], 50, '.')); ?>...</p> <!-- Show first 50 words of job description using word_limiter helper -->
+              <p class="card-text mb-5"><?= esc(word_limiter($job['short_description'], 50, '.')); ?>...</p> <!-- Show first 50 words of job description using word_limiter helper -->
               <!-- View Job Button -->
-              <a href="<?= site_url('jobs-board/job/' . $job['id']) ?>" class="btn view-job-btn">View Job</a>
+              <a href="<?= base_url(relativePath: 'jobs-board/job/' . $job['id']) ?>" class="btn view-job-btn">View Job</a>
             </div>
           </div>
         </div>
@@ -190,14 +190,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h5 class="card-title">${job.job_title}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">${job.employer_name}</h6>
                 <p class="card-text"><strong>Location:</strong> ${job.location}</p>
+                <!-- Check if salary exists, if not print 'Not specified' -->
                 <p class="card-text"><strong>Salary:</strong> ${
                   (job.minimum_salary || job.maximum_salary)
                     ? `${job.minimum_salary ? '£' + Number(job.minimum_salary).toLocaleString() : ''}${job.maximum_salary ? ' - £' + Number(job.maximum_salary).toLocaleString() : ''}`
                     : 'Not specified'
-                }</p>                <p class="card-text"><strong>Applications:</strong> ${job.applications_count ?? 0}</p>
+                }</p>                
+                <p class="card-text"><strong>Applications:</strong> ${job.applications_count ?? 0}</p>
                 <p class="card-text"><strong>Deadline:</strong> ${job.expiration_date}</p>
-                <p class="card-text mb-5">${job.job_description.split(' ').slice(0, 50).join(' ')}...</p>
-                <a href="#" class="btn view-job-btn">View Job</a>
+                <p class="card-text mb-5">${job.short_description.split(' ').slice(0, 50).join(' ')}...</p>
+                <a href="<?= base_url(relativePath: 'jobs-board/job/' . $job['id']) ?>" class="btn view-job-btn">View Job</a>
               </div>
             </div>
           `;
