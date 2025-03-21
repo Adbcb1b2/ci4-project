@@ -37,7 +37,7 @@
       <div class="col-md-4">
         <label for="jobTitleFilter" class="form-label">Job Title</label>
         <select id="jobTitleFilter" class="form-select">
-          <option value="">Any </option>
+          <option value="">Any Job Title</option>
           <!-- The rest of the options will be filled in by AJAX -->
         </select>
       </div>
@@ -109,7 +109,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM fully loaded, fetching dropdown criteria');
 
-  // Grab references to the filter inputs and job results container
+  // References to the filter elements and job results container
   const locationFilter = document.getElementById('locationFilter');
   const jobTitleFilter = document.getElementById('jobTitleFilter');
   const salaryFilter = document.getElementById('salaryFilter');
@@ -117,9 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // On page load, fetch unique dropdown options from the server (locations and job titles)
   fetch('/ci4-project/public/jobs-board/getDropdownData')
-    .then(res => res.json()) // Convert response to JSON
+    .then(response => response.json()) // Convert response to JSON
     .then(data => {
-      // Use helper function to populate each dropdown
+      // Use function to populate each dropdown
       fillDropdown(locationFilter, data.locations, 'location', 'Any Location');
       fillDropdown(jobTitleFilter, data.titles, 'job_title', 'Any Job Title');
     })
