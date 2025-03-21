@@ -73,7 +73,7 @@
             // Insert the job into the database
             $jobsModel->insertJob($jobData);
 
-            // Print repsone to the browser
+            // Print repsone to the browser - debugging purposes
             // echo '<pre>';
             // print_r($jobs);
             // echo '</pre>';

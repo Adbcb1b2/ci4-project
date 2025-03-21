@@ -2,7 +2,7 @@
   <!-- Navigation Bar --> 
   <nav class="navbar bg-body-tertiary custom-background">
     <div class="container-fluid">
-      <a class="navbar-brand banner-title px-3">Jobs Board for Graduate Developers</a>
+      <a href="<?= base_url('jobs-board') ?>" class="navbar-brand banner-title px-3">Jobs Board for Graduate Developers</a>
 
   <!-- Search Bar Form -->
   <form class="d-flex flex-grow-1" role="search" style="max-width: 500px; margin-left: auto;">
@@ -95,7 +95,7 @@
               <!-- First 50 words of job description -->
               <p class="card-text mb-5"><?= esc(word_limiter($job['job_description'], 50, '.')); ?>...</p> <!-- Show first 50 words of job description using word_limiter helper -->
               <!-- View Job Button -->
-              <a href="#" class="btn view-job-btn">View Job</a>
+              <a href="<?= site_url('jobs-board/job/' . $job['id']) ?>" class="btn view-job-btn">View Job</a>
             </div>
           </div>
         </div>

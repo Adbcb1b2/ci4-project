@@ -22,14 +22,14 @@ class JobsBoardController extends BaseController
         $jobs = $jobsModel->findAll();
 
         //Check if jobs data is outdated (older than 1 hour)
-        if($this->isDataOutdated($jobs)) {
+       // if($this->isDataOutdated($jobs)) {
             // Fetch new jobs from Reed API, update the DB
             $apiController = new APIController();
             $apiController->fetchJobsFromReed();
 
             // Get updated jobs from the database after inserting new ones
             $jobs = $jobsModel->getJobs();
-        }
+      //  }
         
         //Return the view with the jobs data
         return view('templates/header') . view('jobs/jobs_board', ['jobs' => $jobs]) . view('templates/footer');
@@ -57,7 +57,7 @@ class JobsBoardController extends BaseController
     }
 
     /**
-     * Gets data for the dropdown menus on the job board page
+     * Gets data via AJAX for the dropdown menus on the job board page
      * @return mixed
      */
     public function getDropdownData()
@@ -76,7 +76,7 @@ class JobsBoardController extends BaseController
     }
 
     /**
-     * Filters jobs based on the dropdown criteria
+     * Filters jobs via AJAX based on the dropdown criteria
      * @return mixed
      */
     public function filter()
@@ -95,6 +95,30 @@ class JobsBoardController extends BaseController
         // Return the response in JSON format, to be used in the AJAX call
         return $this->response->setJSON($jobs);
 
+
+    }
+
+    /**
+     * Displays the job details page by loading the necessary views with the job data
+     * @param mixed $id
+     * @return string
+     */
+    public function viewJob($id){
+        // Create an instance of the JobsModel
+        $jobsModel = new JobsModel(); 
+
+        // Find the job with the given ID
+        $job = $jobsModel->find($id); 
+        
+        // Job data to send to the view
+        $data['job'] = $job; 
+
+        // Extract title to be the page title
+        $data['title'] = $job['job_title']; 
+
+        // Return the views, with the job data
+        return view('templates/header', $data) . view('jobs/job_details', $data) . view('templates/footer');
+                
 
     }
 

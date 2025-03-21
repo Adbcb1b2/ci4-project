@@ -42,7 +42,7 @@ class JobsModel extends Model
      */
     public function insertJob($jobData)
     {
-        return $this->insert($jobData); // Need to build a 
+        return $this->insert($jobData); // Insert the job data into the database
     }
 
     /**

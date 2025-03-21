@@ -89,6 +89,18 @@
             border-radius: 10px;
         }
 
+        .custom-button{
+            background: rgb(1, 10, 147);
+            color: white;
+            border: none;
+            margin: 20px 0px;
+        }
+
+        .custom-button:hover{
+            background: rgb(41, 169, 233);
+            color: white;
+            border: none;
+        }
 
 
     </style>

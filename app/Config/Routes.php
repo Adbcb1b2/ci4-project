@@ -19,3 +19,6 @@ $routes->get('/jobs-board/getDropdownData', 'JobsBoardController::getDropdownDat
 
 // Endpoint for filtering jobs by dropdown criteria
 $routes->post('/jobs-board/filter', 'JobsBoardController::filter');
+
+// Route for viewing individual job, num for job ID and $1 to get first wildcard from url
+$routes->get('/jobs-board/job/(:num)', 'JobsBoardController::viewJob/$1');
