@@ -69,7 +69,7 @@ class JobsModel extends Model
      * @param mixed $minSalary
      * @return array
      */
-    public function getFilteredJobs($location = '', $title = '', $minSalary = 0)
+    public function getFilteredJobs($location = '', $title = '', $minSalary = 0, $sortBy='')
     {
         // To build complex query, step by step, as includes conditional logic
         $builder = $this->builder();
@@ -88,6 +88,33 @@ class JobsModel extends Model
         if($minSalary > 0){
             $builder->where('minimum_salary >=', $minSalary);
         }
+
+            // Apply sorting
+        switch ($sortBy) {
+            case 'salary_asc':
+                $builder->orderBy('minimum_salary', 'ASC');
+                break;
+            case 'salary_desc':
+                $builder->orderBy('maximum_salary', 'DESC');
+                break;
+            case 'application_count_asc':
+                $builder->orderBy('applications_count', 'ASC');
+                break;
+            case 'application_count_desc':
+                $builder->orderBy('applications_count', 'DESC');
+                break;
+            case 'deadline_asc':
+                $builder->orderBy('expiration_date', 'ASC');
+                break;
+            case 'deadline_desc':
+                $builder->orderBy('expiration_date', 'DESC');
+                break;
+            case 'most_recent':
+            default:
+                $builder->orderBy('reed_creation_date', 'DESC');
+                break;
+    }
+
 
         return $builder->get()->getResultArray();
 

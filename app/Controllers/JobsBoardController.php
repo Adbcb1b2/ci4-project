@@ -84,12 +84,13 @@ class JobsBoardController extends BaseController
         $location = $this->request->getPost('location');
         $title = $this->request->getPost('title');
         $minSalary = $this->request->getPost('minSalary');
+        $sortBy = $this->request->getPost('sortBy');
 
         // Instance of the JobsModel
         $jobsModel = new JobsModel();
 
         // Call method from the model with the data recieve from the dropdowns
-        $jobs = $jobsModel->getFilteredJobs($location, $title, $minSalary);
+        $jobs = $jobsModel->getFilteredJobs($location, $title, $minSalary, $sortBy);
 
         // Return the response in JSON format, to be used in the AJAX call
         return $this->response->setJSON($jobs);

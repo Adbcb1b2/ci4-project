@@ -1,4 +1,4 @@
-<div>
+<div class="body-background">
   <!-- Navigation Bar --> 
   <nav class="navbar bg-body-tertiary custom-background">
     <div class="container-fluid">
@@ -13,7 +13,7 @@
     <div class="filter-bar row mt-4 mb-4">
 
       <!--Location Dropdown Filter -->
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="locationFilter" class="form-label">Location</label>
         <select id="locationFilter" class="form-select">
           <option value="">Any Location</option>
@@ -22,7 +22,7 @@
       </div>
 
       <!-- Job Title Dropdown Filter -->
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="jobTitleFilter" class="form-label">Job Title</label>
         <select id="jobTitleFilter" class="form-select">
           <option value="">Any Job Title</option>
@@ -31,7 +31,7 @@
       </div>
 
       <!-- Minimum Salary Dropdown Filter -->
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="salaryFilter" class="form-label">Minimum Salary</label>
         <select id="salaryFilter" class="form-select">
           <option value="0">Any Salary</option>
@@ -43,10 +43,25 @@
           <option value="70000">£70,000+</option>
         </select>
       </div>
+
+      <!-- Sorting Drop Down Filter-->
+      <div class="col-md-3">
+        <label for="sortFilter" class="form-label">Sort By</label>
+        <select id="sortFilter" class="form-select">
+          <option value="most_recent">Most Recent</option>
+          <option value="salary_asc">Salary (Low to High)</option>
+          <option value="salary_desc">Salary (High to Low)</option>
+          <option value="application_count_asc">Applications (Low to High)</option>
+          <option value="application_count_desc">Applications (High to Low)</option>
+          <option value="deadline_asc">Deadline (Oldest to Newest)</option>
+          <option value="deadline_desc">Deadline (Newest to Oldest)</option>
+        </select>
+      </div>
     </div>
 
+
     <!-- Job Listings Container to show jobs cards-->
-    <div class="row d-flex align-items-stretch" id="jobResultsContainer">
+    <div class="row d-flex align-items-stretch card-container-background" id="jobResultsContainer">
       <?php foreach ($jobs as $job): ?>
         <div class="col-md-4 col-sm-6 col-xsm-1 mb-3">
           <div class="card h-100">
@@ -99,10 +114,13 @@
   document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded, fetching dropdown criteria');
 
-    // References to the filter elements and job results container
+    // References to the filter elements
     const locationFilter = document.getElementById('locationFilter');
     const jobTitleFilter = document.getElementById('jobTitleFilter');
     const salaryFilter = document.getElementById('salaryFilter');
+    const sortBy = document.getElementById('sortFilter'); 
+
+    // Reference to the job results container
     const resultsContainer = document.getElementById('jobResultsContainer');
 
     // On page load, fetch unique dropdown options from the server (locations and job titles)
@@ -134,7 +152,7 @@
     }
 
     // Trigger filtering when any dropdown changes
-    [locationFilter, jobTitleFilter, salaryFilter].forEach(select => {
+    [locationFilter, jobTitleFilter, salaryFilter, sortBy].forEach(select => {
       // Listen for changes in the dropdown menu
       select.addEventListener('change', () => {
         console.log('Filter changed');
@@ -145,6 +163,7 @@
         formData.append('location', locationFilter.value);
         formData.append('title', jobTitleFilter.value);
         formData.append('minSalary', salaryFilter.value);
+        formData.append('sortBy', sortBy.value);
 
         // AJAX post request, sending formData
         fetch(`${baseUrl}jobs-board/filter`, {

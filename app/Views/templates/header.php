@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Custom CSS -->
+    <!-- Custom CSS -->
     <style>
         
         .custom-background {
@@ -18,12 +19,24 @@
             color: white;
             padding: 15px 0;
             box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2); 
+            
+        }
+
+        .card-container-background {
+            background: linear-gradient(to right, rgb(1, 10, 147), rgb(41, 169, 233)); 
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2); 
+            border-radius: 10px;
+            margin-bottom: 20px;
+            
         }
 
         .banner-title {
             font-size: 2rem;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); 
             color: white;
+            
         }
 
         .banner-title:hover{
@@ -87,6 +100,8 @@
             color: white;
             padding: 15px;
             border-radius: 10px;
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2); 
+
         }
 
         .custom-button{
@@ -101,6 +116,13 @@
             color: white;
             border: none;
         }
+
+        .body-background {
+            background: linear-gradient(to right, rgb(243, 244, 245), rgb(230, 232, 235) ); 
+
+        }
+
+        
 
 
     </style>
