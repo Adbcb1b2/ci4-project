@@ -137,8 +137,63 @@
       jobTitleFilter.selectedIndex = 0;
       salaryFilter.selectedIndex = 0;
       sortBy.selectedIndex = 0;
-      
-      //
+
+      // Create new form object, so all data is fetched
+      const formData = new FormData();
+      formData.append('location', '');
+      formData.append('title', '');
+      formData.append('minSalary', '0');
+      formData.append('sortBy', 'most_recent');
+
+      // Fetch all jobs again
+      fetch(`${baseUrl}jobs-board/filter`, {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(jobs => {
+          resultsContainer.innerHTML = '';
+          if (jobs.length === 0) {
+            resultsContainer.innerHTML = '<p>No jobs found.</p>';
+            return;
+          }
+          // If jobs are returned, dynamically create a card for each job
+          // If salary given, format and display, otherwise show 'Not specified'
+          jobs.forEach(job => {
+            const div = document.createElement('div');
+            div.className = 'col-md-4 col-sm-6 col-xsm-1 mb-3';
+            div.innerHTML = `
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">${job.job_title}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">${job.employer_name}</h6>
+                  <p class="card-text"><strong>Location:</strong> ${job.location}</p>
+                  <p class="card-text"><strong>Salary:</strong> ${
+                    (job.minimum_salary || job.maximum_salary)
+                      ? `${job.minimum_salary ? '£' + Number(job.minimum_salary).toLocaleString() : ''}${job.maximum_salary ? ' - £' + Number(job.maximum_salary).toLocaleString() : ''}`
+                      : 'Not specified'
+                  }</p>
+                  <p class="card-text"><strong>Applications:</strong> ${job.applications_count ?? 0}</p>
+                  <p class="card-text"><strong>Deadline:</strong> ${job.expiration_date}</p>
+                  <p class="card-text mb-5">${job.short_description.split(' ').slice(0, 50).join(' ')}...</p>
+                  <a href="${baseUrl}jobs-board/job/${job.id}" class="btn view-job-btn">View Job</a>
+                </div>
+              </div>
+            `;
+            // Insert cards to resultsContainer
+            resultsContainer.appendChild(div);
+          });
+
+          // Add listener to all view job buttons after fetch
+          document.querySelectorAll('.view-job-btn').forEach(button => {
+            button.addEventListener('click', () => {
+              console.log('View job clicked');
+              triggerVibration();
+            });
+          });
+        })
+        .catch(err => console.error('Reset fetch error:', err));
+
     });
 
     // Add listener to all view job buttons on intiial load
