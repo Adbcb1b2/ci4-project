@@ -56,14 +56,14 @@
 
     <!-- Reset Filters Button -->
     <div class="col-12 text-end">
-      <button id="resetFiltersBtn" class="btn btn-secondary">
+      <button id="reset-filters-btn" class="btn btn-secondary">
       <!-- Bootstrap Icon -->
-      <i class="bi bi-arrow-clockwise me-1"></i> Reset Filters
+      <i class="bi bi-arrow-clockwise me-2"></i> Reset Filters
       </button>
     </div>
 
 
-    <!-- Job Listings Container to show jobs cards-->
+    <!-- Job Listings Container to show jobs cards - initial load-->
     <div class="row d-flex align-items-stretch card-container-background" id="jobResultsContainer">
       <?php foreach ($jobs as $job): ?>
         <div class="col-md-4 col-sm-6 col-xsm-1 mb-3">
@@ -122,9 +122,32 @@
     const jobTitleFilter = document.getElementById('jobTitleFilter');
     const salaryFilter = document.getElementById('salaryFilter');
     const sortBy = document.getElementById('sortFilter');
+    
 
     // Reference to the job results container
     const resultsContainer = document.getElementById('jobResultsContainer');
+
+    // Reference to the reset filters button
+    const resetFiltersBtn = document.getElementById('reset-filters-btn');
+
+    // Event Listner for the reset filters button
+    resetFiltersBtn.addEventListener('click', () => {
+      // Reset dropdowns in the UI
+      locationFilter.selectedIndex = 0;
+      jobTitleFilter.selectedIndex = 0;
+      salaryFilter.selectedIndex = 0;
+      sortBy.selectedIndex = 0;
+      
+      //
+    });
+
+    // Add listener to all view job buttons on intiial load
+    document.querySelectorAll('.view-job-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        console.log('View job clicked');
+        triggerVibration();
+      });
+    });
 
     // Vibration function - Hardware API from browser
     function triggerVibration(duration = 100) {
@@ -239,13 +262,7 @@
         });
 
         
-        // Add listener to all view job buttons on intiial load
-        document.querySelectorAll('.view-job-btn').forEach(button => {
-          button.addEventListener('click', () => {
-            console.log('View job clicked');
-            triggerVibration();
-          });
-        });
+
     });
   });
 </script>
