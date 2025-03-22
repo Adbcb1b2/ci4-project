@@ -1,8 +1,9 @@
 <div class="container mt-4">
 
 
-    <div class="d-flex justify-content-end mb-3">
-    <a href="<?= base_url('jobs-board') ?>" class="btn custom-button">Back to Jobs Board</a>
+    <div class="d-flex justify-content-between mb-3">
+        <a href="<?= base_url('jobs-board') ?>" class="btn custom-button">Back to Jobs Board</a>
+        <a href="<?= esc($job['job_url']) ?>" target="_blank" class="btn custom-button">Apply on Reed</a>
     </div>
 
     <h1><?= esc($job['job_title'])?></h1>
@@ -28,7 +29,7 @@
     <p><strong>Job Posted:</strong> <?= esc($job['reed_creation_date']) ?></p>
 
     <hr>
-    <!-- Full job description, keep actual formatting returned from reed-->
+    <!-- Full job description, keep actual formatting returned from reed so that HTML is rendered-->
     <?= htmlspecialchars_decode($job['job_description']) ?>
     <hr>
     <!-- Link to job application on Reed -->

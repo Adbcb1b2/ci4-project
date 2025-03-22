@@ -118,6 +118,14 @@
     // Reference to the job results container
     const resultsContainer = document.getElementById('jobResultsContainer');
 
+    // Vibration function - Hardware API from browser
+    function triggerVibration(duration = 100) {
+      if (navigator.vibrate) {
+        console.log(`Vibrating for ${duration}ms...`);
+        navigator.vibrate(duration);
+      }
+  }
+
     // On page load, fetch unique dropdown options from the server (locations and job titles)
     fetch(`${baseUrl}jobs-board/getDropdownData`)
       .then(response => response.json()) // Convert response to JSON
@@ -151,6 +159,10 @@
       // Listen for changes in the dropdown menu
       select.addEventListener('change', () => {
         console.log('Filter changed');
+      // If the browser supports vibration, vibrate when there's a change in filter values
+        triggerVibration();
+      
+
 
         // Create a form object
         const formData = new FormData();
@@ -177,11 +189,6 @@
             return;
           }
 
-          // If the browser supports vibration, vibrate after successful fetch
-          if (navigator.vibrate) {
-            console.log('Vibrating after filter fetch...');
-            navigator.vibrate(100); // vibrate for 100ms
-          }
 
           // If jobs are returned, dynamically create a card for each job
           // If salary given, format and display, otherwise show 'Not specified'
@@ -210,19 +217,18 @@
             resultsContainer.appendChild(div);
           });
 
-          // Add listener to all view job buttons
-          document.querySelectorAll('.view-job-btn').forEach(button => {
-            button.addEventListener('click', () => {
-              console.log('View job clicked');
-              if (navigator.vibrate) {
-                console.log('Vibrating...');
-                navigator.vibrate(100);
-              }
-            });
-          });
+
         })
         // Catch errors
         .catch(error => console.error(' Fetch error:', error));
+      });
+    });
+
+        // Add listener to all view job buttons
+    document.querySelectorAll('.view-job-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        console.log('View job clicked');
+        triggerVibration();
       });
     });
   });
