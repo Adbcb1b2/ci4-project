@@ -121,6 +121,10 @@
 
         }
 
+        .black-p{
+            color: black;
+        }
+
         
 
 

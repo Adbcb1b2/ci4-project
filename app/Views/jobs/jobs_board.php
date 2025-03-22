@@ -52,15 +52,18 @@
           <option value="deadline_desc">Deadline (Newest to Oldest)</option>
         </select>
       </div>
+
+      <!-- Reset Filters Button -->
+      <div class="col-12 text-end mt-3">
+        <button id="reset-filters-btn" class="btn btn-secondary">
+        <!-- Bootstrap Icon -->
+        <i class="bi bi-arrow-clockwise me-2"></i> Reset Filters
+        </button>
+      </div>
+      
     </div>
 
-    <!-- Reset Filters Button -->
-    <div class="col-12 text-end">
-      <button id="reset-filters-btn" class="btn btn-secondary">
-      <!-- Bootstrap Icon -->
-      <i class="bi bi-arrow-clockwise me-2"></i> Reset Filters
-      </button>
-    </div>
+
 
 
     <!-- Job Listings Container to show jobs cards - initial load-->
@@ -138,6 +141,8 @@
       salaryFilter.selectedIndex = 0;
       sortBy.selectedIndex = 0;
 
+      triggerVibration();
+
       // Create new form object, so all data is fetched
       const formData = new FormData();
       formData.append('location', '');
@@ -154,7 +159,7 @@
         .then(jobs => {
           resultsContainer.innerHTML = '';
           if (jobs.length === 0) {
-            resultsContainer.innerHTML = '<p>No jobs found.</p>';
+            resultsContainer.innerHTML = '<p class="black-p">No jobs found.</p>';
             return;
           }
           // If jobs are returned, dynamically create a card for each job
@@ -272,7 +277,7 @@
 
             // If no jobs are returned, display 'No jobs found'
             if (jobs.length === 0) {
-              resultsContainer.innerHTML = '<p>No jobs found.</p>';
+              resultsContainer.innerHTML = '<p class="black-p">No jobs found.</p>';
               return;
             }
 
