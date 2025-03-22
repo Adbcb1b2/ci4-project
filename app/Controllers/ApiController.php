@@ -107,7 +107,7 @@ class ApiController extends BaseController
     }
 
     /**
-     * Summary of getJobCoordinates
+     * Method to get the coordinates of a job location
      * @return \CodeIgniter\HTTP\ResponseInterface
      */
     public function getJobCoordinates()
