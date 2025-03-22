@@ -128,7 +128,7 @@
     // Reference to the job results container
     const resultsContainer = document.getElementById('jobResultsContainer');
 
-    // Attach listener to initial View Job buttons on page load, need to attach agin after rendering new jobs
+    // Attach listener to initial View Job buttons on page load, need to attach again after rendering new jobs
     attachViewButtonListeners();
 
     // Vibration function - Hardware API from browser. Default 100ms
@@ -141,7 +141,7 @@
 
     // Function with logic to populate dropdowns - for Location and Job Title
     function fillDropdown(dropdownMenu, items, key, defaultLabel) {
-      // Clear the dropdown first, add the feault option
+      // Clear the dropdown first, add the default option
       dropdownMenu.innerHTML = `<option value="">${defaultLabel}</option>`;
       // Loop through the items, either location or job title, and add them to the dropdown
       items.forEach(item => {
@@ -274,8 +274,24 @@
       });
     });
 
+    // 3. Handle browser back navigation - reset dropdowns and re-fetch jobs
+    window.addEventListener('pageshow', () => {
+      console.log('Back navigation detected – resetting dropdowns and re-fetching jobs');
+
+      // Reset dropdowns in the UI
+      locationFilter.selectedIndex = 0;
+      jobTitleFilter.selectedIndex = 0;
+      salaryFilter.selectedIndex = 0;
+      sortBy.selectedIndex = 0;
+
+      // Fetch jobs with default values
+      fetchFilteredJobs({
+        location: '',
+        title: '',
+        minSalary: '0',
+        sortBy: 'most_recent'
+      });
+    });
 
   });
 </script>
-
-
