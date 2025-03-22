@@ -105,4 +105,54 @@ class ApiController extends BaseController
             // echo '<pre>'; print_r($jobData); echo '</pre>';
         }
     }
+
+    /**
+     * Summary of getJobCoordinates
+     * @return \CodeIgniter\HTTP\ResponseInterface
+     */
+    public function getJobCoordinates()
+    {
+        // Get the location from the url
+        $location = $this->request->getGet('location');
+
+        // If no location in the URL, return an error
+        if(!$location){
+            return $this->response->setJSON(['error' => 'No location in the URL']);
+        }
+
+        // API Key
+        $apiKey = '4393e3c22d7c4668a3d40ecc62ba6c10';
+
+        // URL for the API call
+        $placeName = urlencode($location);
+        $url = "https://api.opencagedata.com/geocode/v1/json?q={$placeName}&key={$apiKey}";
+
+        // Initialise CURL object
+        $ch = curl_init();
+
+        // Set CURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+
+        // Make the CURL call
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        // Decode response into JSON
+        $data = json_decode($response, true);
+
+        // Return cooridinates as JSON if found
+        if (!empty($data['results'][0]['geometry'])) {
+            // Return the coordinates of job location as JSON
+            return $this->response->setJSON([
+                'lat' => $data['results'][0]['geometry']['lat'],
+                'lng' => $data['results'][0]['geometry']['lng']
+            ]);
+        }
+        // If no coordinates found, return an error
+        return $this->response->setJSON(['error' => 'No coordinates found']);
+
+
+        
+    }
 }
