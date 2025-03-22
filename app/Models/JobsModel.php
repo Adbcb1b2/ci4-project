@@ -33,7 +33,11 @@ class JobsModel extends Model
      */
     public function getJobs()
     {
-        return $this-> findAll(); // Return all data from the database
+        // Get all jobs, order by most recent first
+        return $this->builder()
+                    ->orderBy('reed_creation_date', 'DESC')
+                    ->get()
+                    ->getResultArray();
     }
 
     /**
