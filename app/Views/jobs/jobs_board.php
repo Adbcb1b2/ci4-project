@@ -1,10 +1,5 @@
-<div class="body-background">
-  <!-- Navigation Bar --> 
-  <nav class="navbar bg-body-tertiary custom-background">
-    <div class="container-fluid">
-      <a href="<?= base_url('jobs-board') ?>" class="navbar-brand banner-title px-3">Grad Dev Jobs</a>
-    </div>
-  </nav>
+<div >
+
 
   <!-- Main Content -->
   <div class="container mt-3">

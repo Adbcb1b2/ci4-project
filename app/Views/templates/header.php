@@ -23,12 +23,11 @@
         }
 
         .card-container-background {
-            background: linear-gradient(to right, rgb(1, 10, 147), rgb(41, 169, 233)); 
+           
             color: white;
             padding: 15px 0;
-            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2); 
             border-radius: 10px;
-            margin-bottom: 20px;
+            
             
         }
 
@@ -127,4 +126,10 @@
 
     </style>
 </head>
-<body>
+<body class="body-background">
+      <!-- Navigation Bar --> 
+  <nav class="navbar bg-body-tertiary custom-background">
+    <div class="container-fluid">
+      <a href="<?= base_url('jobs-board') ?>" class="navbar-brand banner-title px-3">Grad Dev Jobs</a>
+    </div>
+  </nav>
