@@ -54,6 +54,14 @@
       </div>
     </div>
 
+    <!-- Reset Filters Button -->
+    <div class="col-12 text-end">
+      <button id="resetFiltersBtn" class="btn btn-secondary">
+      <!-- Bootstrap Icon -->
+      <i class="bi bi-arrow-clockwise me-1"></i> Reset Filters
+      </button>
+    </div>
+
 
     <!-- Job Listings Container to show jobs cards-->
     <div class="row d-flex align-items-stretch card-container-background" id="jobResultsContainer">
@@ -113,7 +121,7 @@
     const locationFilter = document.getElementById('locationFilter');
     const jobTitleFilter = document.getElementById('jobTitleFilter');
     const salaryFilter = document.getElementById('salaryFilter');
-    const sortBy = document.getElementById('sortFilter'); 
+    const sortBy = document.getElementById('sortFilter');
 
     // Reference to the job results container
     const resultsContainer = document.getElementById('jobResultsContainer');
@@ -124,7 +132,7 @@
         console.log(`Vibrating for ${duration}ms...`);
         navigator.vibrate(duration);
       }
-  }
+    }
 
     // On page load, fetch unique dropdown options from the server (locations and job titles)
     fetch(`${baseUrl}jobs-board/getDropdownData`)
@@ -159,10 +167,9 @@
       // Listen for changes in the dropdown menu
       select.addEventListener('change', () => {
         console.log('Filter changed');
-      // If the browser supports vibration, vibrate when there's a change in filter values
-        triggerVibration();
-      
 
+        // If the browser supports vibration, vibrate when there's a change in filter values
+        triggerVibration();
 
         // Create a form object
         const formData = new FormData();
@@ -177,59 +184,69 @@
           method: 'POST',
           body: formData
         })
-        // Convert the server's response to JSON
-        .then(response => response.json())
-        // When JSON is received, populate the results container
-        .then(jobs => {
-          // Clear the results container
-          resultsContainer.innerHTML = '';
-          // If no jobs are returned, display 'No jobs found'
-          if (jobs.length === 0) {
-            resultsContainer.innerHTML = '<p>No jobs found.</p>';
-            return;
-          }
+          // Convert the server's response to JSON
+          .then(response => response.json())
 
+          // When JSON is received, populate the results container
+          .then(jobs => {
+            // Clear the results container
+            resultsContainer.innerHTML = '';
 
-          // If jobs are returned, dynamically create a card for each job
-          // If salary given, format and display, otherwise show 'Not specified'
-          jobs.forEach(job => {
-            const div = document.createElement('div');
-            div.className = 'col-md-4 col-sm-6 col-xsm-1 mb-3';
-            div.innerHTML = `
-              <div class="card h-100">
-                <div class="card-body">
-                  <h5 class="card-title">${job.job_title}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">${job.employer_name}</h6>
-                  <p class="card-text"><strong>Location:</strong> ${job.location}</p>
-                  <p class="card-text"><strong>Salary:</strong> ${
-                    (job.minimum_salary || job.maximum_salary)
-                      ? `${job.minimum_salary ? '£' + Number(job.minimum_salary).toLocaleString() : ''}${job.maximum_salary ? ' - £' + Number(job.maximum_salary).toLocaleString() : ''}`
-                      : 'Not specified'
-                  }</p>
-                  <p class="card-text"><strong>Applications:</strong> ${job.applications_count ?? 0}</p>
-                  <p class="card-text"><strong>Deadline:</strong> ${job.expiration_date}</p>
-                  <p class="card-text mb-5">${job.short_description.split(' ').slice(0, 50).join(' ')}...</p>
-                  <a href="${baseUrl}jobs-board/job/${job.id}" class="btn view-job-btn">View Job</a>
+            // If no jobs are returned, display 'No jobs found'
+            if (jobs.length === 0) {
+              resultsContainer.innerHTML = '<p>No jobs found.</p>';
+              return;
+            }
+
+            // If jobs are returned, dynamically create a card for each job
+            // If salary given, format and display, otherwise show 'Not specified'
+            jobs.forEach(job => {
+              const div = document.createElement('div');
+              div.className = 'col-md-4 col-sm-6 col-xsm-1 mb-3';
+              div.innerHTML = `
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">${job.job_title}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${job.employer_name}</h6>
+                    <p class="card-text"><strong>Location:</strong> ${job.location}</p>
+                    <p class="card-text"><strong>Salary:</strong> ${
+                      (job.minimum_salary || job.maximum_salary)
+                        ? `${job.minimum_salary ? '£' + Number(job.minimum_salary).toLocaleString() : ''}${job.maximum_salary ? ' - £' + Number(job.maximum_salary).toLocaleString() : ''}`
+                        : 'Not specified'
+                    }</p>
+                    <p class="card-text"><strong>Applications:</strong> ${job.applications_count ?? 0}</p>
+                    <p class="card-text"><strong>Deadline:</strong> ${job.expiration_date}</p>
+                    <p class="card-text mb-5">${job.short_description.split(' ').slice(0, 50).join(' ')}...</p>
+                    <a href="${baseUrl}jobs-board/job/${job.id}" class="btn view-job-btn">View Job</a>
+                  </div>
                 </div>
-              </div>
-            `;
-            // Insert cards to resultsContainer
-            resultsContainer.appendChild(div);
+              `;
+              // Insert cards to resultsContainer
+              resultsContainer.appendChild(div);
+            });
+
+
+            // Add listener to all view job buttons after fetch
+            document.querySelectorAll('.view-job-btn').forEach(button => {
+              button.addEventListener('click', () => {
+                console.log('View job clicked');
+                triggerVibration();
+              });
+            });
+          })
+          // Catch errors
+          .catch(error => console.error(' Fetch error:', error));
+        });
+
+        
+        // Add listener to all view job buttons on intiial load
+        document.querySelectorAll('.view-job-btn').forEach(button => {
+          button.addEventListener('click', () => {
+            console.log('View job clicked');
+            triggerVibration();
           });
-
-
-        })
-        // Catch errors
-        .catch(error => console.error(' Fetch error:', error));
-      });
-    });
-
-        // Add listener to all view job buttons
-    document.querySelectorAll('.view-job-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        console.log('View job clicked');
-        triggerVibration();
-      });
+        });
     });
   });
 </script>
+
